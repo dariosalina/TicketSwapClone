@@ -4,6 +4,7 @@ import { IsString, IsEmail } from "class-validator";
 import Ticket from "../tickets/entity";
 import Event from "../events/entity";
 
+
 @Entity()
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
