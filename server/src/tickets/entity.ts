@@ -2,7 +2,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 import { BaseEntity } from "typeorm/repository/BaseEntity";
 import { IsString, IsInt } from "class-validator";
@@ -20,7 +21,7 @@ export default class Ticket extends BaseEntity {
   picture: string;
 
   @IsInt()
-  @Column({ nullable: false })
+  @Column('integer', { nullable: false })
   price: number;
 
   @IsString()
@@ -33,6 +34,6 @@ export default class Ticket extends BaseEntity {
   @ManyToOne(_ => User, user => user.tickets, { eager: true })
   user: User;
 
-  @ManyToOne(_ => Comment, comment => comment.tickets, { eager: true })
-  comment: Comment;
+  @OneToMany(_ => Comment, comment => comment.ticket, { eager: true })
+  comments: Comment[];
 }

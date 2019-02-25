@@ -2,7 +2,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   ManyToOne
 } from "typeorm";
 import { BaseEntity } from "typeorm/repository/BaseEntity";
@@ -19,9 +18,10 @@ export default class Comment extends BaseEntity {
   @Column("text", { nullable: false })
   comment: string;
 
-  @ManyToOne(_ => User, user => user.event, { eager: true })
+  @ManyToOne(_ => User, user => user.comments, { eager: true })
   user: User;
+  
 
-  @OneToMany(_ => Ticket, ticket => ticket.event, { eager: true })
-  tickets: Ticket[];
+  @ManyToOne(_ => Ticket, ticket => ticket.comments)
+  ticket: Ticket;
 }

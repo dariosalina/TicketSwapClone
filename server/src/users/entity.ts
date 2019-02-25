@@ -3,7 +3,7 @@ import { BaseEntity } from "typeorm/repository/BaseEntity";
 import { IsString, IsEmail } from "class-validator";
 import Ticket from "../tickets/entity";
 import Event from "../events/entity";
-
+import Comment from '../comments/entity'
 
 @Entity()
 export default class User extends BaseEntity {
@@ -22,14 +22,16 @@ export default class User extends BaseEntity {
   @Column("text", { nullable: false })
   email: string;
 
-  password;
+// password to be finished, authentication to be done
+  @Column("text")
+  password: string;
 
-  @OneToMany(_ => Ticket, ticket => ticket.event, { eager: true })
+  @OneToMany(_ => Ticket, ticket => ticket.user)
   tickets: Ticket[];
 
-  @OneToMany(_ => Event, event => event.tickets, { eager: true })
-  event: Event;
+  @OneToMany(_ => Event, event => event.user)
+  events: Event[];
 
-  @OneToMany(_ => Comment, comment => comment.ticket, { eager: true })
-  comment: Comment;
+  @OneToMany(_ => Comment, comment => comment.user)
+  comments: Comment[];
 }
