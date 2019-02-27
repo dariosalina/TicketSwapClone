@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom'
 class EventsDetailTicketList extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.id;
+    this.props.loadEvent(id);
     this.props.loadAllTicketsForEvent(id);
   }
 
@@ -27,6 +28,8 @@ class EventsDetailTicketList extends React.Component {
     const Tickets = this.props.tickets;
 
     return (
+
+      // event information to be added! move info from list to here and display
       <div>
         {!Tickets && "Loading"}
         {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}

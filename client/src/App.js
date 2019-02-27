@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom'
 import Home from './components/Home'
 import EventsListContainer from './components/EventsListContainer';
 import EventsDetailTicketList from './components/EventDetail';
+import TicketDetail from './components/TicketDetail';
 
 class App extends Component {
   render() {
@@ -13,8 +14,9 @@ class App extends Component {
         <div>
           <Route path="/" exact component={Home}/>
           {/* route to login page to be added */}
-          <Route path="/events" component={EventsListContainer}/>
-          <Route path="/events/:id" component={EventsDetailTicketList}/>
+          <Route path="/events" exact component={EventsListContainer}/>
+          <Route path="/events/:id" exact component={EventsDetailTicketList}/>
+          <Route path="/tickets/:id" exact component={TicketDetail}/>
         </div>
       </Provider>
     );

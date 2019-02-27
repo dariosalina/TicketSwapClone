@@ -9,6 +9,11 @@ const ticketsFetched = tickets =>({
     tickets
 })
 
+const ticketFetched = ticket => ({
+    type: TICKET_FETCHED,
+    ticket
+})
+
 export const loadAllTicketsForEvent = (eventId) => (dispatch) => {
     request
     .get(`http://localhost:4000/events/tickets/${eventId}`)
@@ -17,3 +22,13 @@ export const loadAllTicketsForEvent = (eventId) => (dispatch) => {
      })
       .catch(console.error);
 }
+
+export const loadTicket = (id) => (dispatch) => {
+    request
+    .get(`http://localhost:4000/tickets/${id}`)
+      .then(response => {
+          console.log(response.body)
+        dispatch(ticketFetched(response.body))
+      })
+      .catch(console.error)
+  }
