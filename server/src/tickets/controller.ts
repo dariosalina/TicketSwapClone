@@ -7,15 +7,23 @@ import {
     Param,
     } from "routing-controllers";
   import Ticket from './entity'
- 
+  
   
   @JsonController()
   export default class TicketsController {
     
     @Get("/tickets/:id")
-    getEvent(@Param("id") id: number) {
+    getTicket(@Param("id") id: number) {
       return Ticket.findOne(id);
     }
+
+    @Get("/events/tickets/:event_id")
+    async getTicketsForEvent(@Param("event_id") id: number)
+     {
+      const ticketsEvent = await Ticket.find({where: {event: id}})
+      return {ticketsEvent}
+    }
+
   
     @Get("/tickets")
     async allTickets() {

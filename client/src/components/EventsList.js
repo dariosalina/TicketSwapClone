@@ -16,7 +16,7 @@ export default class EventsList extends React.Component{
     
       render() {
         const Events = this.props.events;
-        console.log(Events)
+        
         
         return (
           <div>

@@ -28,7 +28,7 @@ export default class Ticket extends BaseEntity {
   @Column("text", { nullable: false })
   description: string;
 
-  @ManyToOne(_ => Event, event => event.tickets, { eager: true })
+  @ManyToOne(_ => Event, event => event.tickets)
   event: Event;
 
   @ManyToOne(_ => User, user => user.tickets, { eager: true })
