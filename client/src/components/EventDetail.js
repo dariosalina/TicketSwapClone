@@ -11,26 +11,27 @@ class EventsDetailTicketList extends React.Component {
     this.props.loadAllTicketsForEvent(id);
   }
 
-  renderTicketList(ticket){
+  renderTicketList(ticket, event){
     return (
       <li key={ticket.id}>
-        <p className="title">
-        <Link to={`tickets/${ticket.id}`}>
-         {/* tickets img */}
-         </Link></p>
+      <Link to={`tickets/${ticket.id}`}>
+        <p className="title">{event.name}</p>
          <p>{ticket.description}</p>
+         </Link>
       </li>
     );
   }
+  
 
   render() {
-    console.log(this.props.tickets);
+    const Event = this.props.event
     const Tickets = this.props.tickets;
-
+    
     return (
 
       // event information to be added! move info from list to here and display
       <div>
+        <h1>{Event.name}</h1>
         {!Tickets && "Loading"}
         {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}
       </div>

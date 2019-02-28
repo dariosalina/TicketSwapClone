@@ -7,6 +7,7 @@ import EventsListContainer from './components/EventsListContainer';
 import EventsDetailTicketList from './components/EventDetail';
 import TicketDetail from './components/TicketDetail';
 
+
 class App extends Component {
   render() {
     return (
@@ -16,7 +17,7 @@ class App extends Component {
           {/* route to login page to be added */}
           <Route path="/events" exact component={EventsListContainer}/>
           <Route path="/events/:id" exact component={EventsDetailTicketList}/>
-          <Route path="/tickets/:id" exact component={TicketDetail}/>
+          <Route path="/events/tickets/:id" exact component={TicketDetail}/>
         </div>
       </Provider>
     );

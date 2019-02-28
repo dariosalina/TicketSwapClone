@@ -1,9 +1,9 @@
-import { TICKET_FETCHED } from "../actions/tickets";
+import { EVENT_FETCHED } from "../actions/events";
 
 export default function(state = [], action) {
   switch (action.type) {
-    case TICKET_FETCHED:
-      return action.ticket;
+    case EVENT_FETCHED:
+      return action.event;
     default:
       return state;
   }
