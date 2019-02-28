@@ -12,21 +12,25 @@ class TicketDetail extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     const Ticket = this.props.ticket
-    
+    const User = this.props.user
     return (
 
       // event information to be added! move info from list to here and display
       <div>
         <h1>Details:</h1>
-        {!Ticket && "Loading"}
-        {Ticket && <span>
+        {!Ticket && !User && "Loading"}
+        {Ticket && User && <span>
         {/* <h3>{Ticket.event.name}</h3> */}
         <p>{Ticket.description}</p>
         <p>{Ticket.price}</p>
         <img alt={'ticket'} src={Ticket.picture} width={100}/>
-          {/* <p>{Ticket.comments.map(comment =><p></p> )}</p> */}
-          <p>Sold by:</p>
+        
+          <p>Sold by:{User.first_name}</p>
+          
+
+  {/* <p>{Ticket.comments.map(comment =><p></p> )}</p> */}
 
         </span>
         }
@@ -37,7 +41,8 @@ class TicketDetail extends React.Component {
 
 const mapStateToProps = state => ({
   ticket: state.ticket,
-  comments: state.comments
+  comments: state.comments,
+  user: state.ticket.user
 });
 
 export default connect(
