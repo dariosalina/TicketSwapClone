@@ -7,6 +7,9 @@ import EventsListContainer from "./components/EventsListContainer";
 import EventsDetailTicketList from "./components/EventDetail";
 import TicketDetail from "./components/TicketDetail";
 import LoginFormContainer from "./components/LoginFormContainer";
+import CreateEventFormContainer from "./components/EventFormContainer";
+import CreateTicketFormContainer from "./components/TicketFormContainer";
+import SignupPage from "./components/SignUpPage";
 
 class App extends Component {
   render() {
@@ -15,10 +18,21 @@ class App extends Component {
         <div>
           <Route path="/" exact component={Home} />
           {/* route to login page to be added */}
+          <Route exact path="/signup" component={SignupPage} />
           <Route path="/events" exact component={EventsListContainer} />
           <Route path="/events/:id" exact component={EventsDetailTicketList} />
           <Route path="/events/tickets/:id" exact component={TicketDetail} />
           <Route path="/login" exact component={LoginFormContainer} />
+          <Route
+            path="/createevents"
+            exact
+            component={CreateEventFormContainer}
+          />
+          <Route
+            path="/createtickets"
+            exact
+            component={CreateTicketFormContainer}
+          />
         </div>
       </Provider>
     );

@@ -23,6 +23,10 @@ export default class Event extends BaseEntity {
   @Column("text", { nullable: false })
   description: string;
 
+  @IsString()
+  @Column("text", { nullable: true })
+  picture: string;
+
   @Column("text", { nullable: false })
   start_date: string;
 

@@ -1,18 +1,8 @@
 import React from "react";
 
-export default function EventForm(props) {
+export default function TicketForm(props) {
   return (
     <form onSubmit={props.onSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          onChange={props.onChange}
-          value={props.values.name}
-        />
-      </label>
-
       <label>
         Picture:
         <input
@@ -34,22 +24,22 @@ export default function EventForm(props) {
       </label>
 
       <label>
-        Start date:
+        Price:
         <input
           type="text"
-          name="start_date"
+          name="price"
           onChange={props.onChange}
-          value={props.values.start_date}
+          value={props.values.price}
         />
       </label>
 
       <label>
-        End date:
+        Event:
         <input
           type="text"
           name="end_date"
           onChange={props.onChange}
-          value={props.values.end_date}
+          value={props.values.event_id}
         />
       </label>
 

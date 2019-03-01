@@ -21,7 +21,7 @@ export default class Ticket extends BaseEntity {
   picture: string;
 
   @IsInt()
-  @Column('integer', { nullable: false })
+  @Column("integer", { nullable: false })
   price: number;
 
   @IsString()
