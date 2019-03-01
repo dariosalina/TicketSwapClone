@@ -1,11 +1,12 @@
 import request from "superagent";
 
-export const ALL_TICKETS_FETCHED = "ALL_TICKETS_FETCHED";
+export const ALL_TICKETS_FETCHED_EVENT = "ALL_TICKETS_FETCHED_EVENT";
 export const TICKET_FETCHED = "TICKET_FETCHED";
 export const ADD_TICKET = "ADD_TICKET";
+export const ALL_TICKETS_FETCHED = "ALL_TICKETS_FETCHED";
 
 const ticketsFetched = tickets => ({
-  type: ALL_TICKETS_FETCHED,
+  type: ALL_TICKETS_FETCHED_EVENT,
   tickets
 });
 
@@ -19,11 +20,25 @@ const addTicket = ticket => ({
   ticket
 });
 
+const retrieveAllTickets = tickets => ({
+  type: ALL_TICKETS_FETCHED,
+  tickets
+});
+
 export const loadAllTicketsForEvent = eventId => dispatch => {
   request
     .get(`http://localhost:4000/events/tickets/${eventId}`)
     .then(response => {
       dispatch(ticketsFetched(response.body));
+    })
+    .catch(console.error);
+};
+
+export const loadTickets = () => dispatch => {
+  request
+    .get(`http://localhost:4000/tickets`)
+    .then(response => {
+      dispatch(retrieveAllTickets(response.body));
     })
     .catch(console.error);
 };

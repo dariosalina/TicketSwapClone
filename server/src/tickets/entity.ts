@@ -2,6 +2,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  CreateDateColumn,
   ManyToOne,
   OneToMany
 } from "typeorm";
@@ -27,6 +28,9 @@ export default class Ticket extends BaseEntity {
   @IsString()
   @Column("text", { nullable: false })
   description: string;
+
+  @CreateDateColumn({ type: "timestamp" })
+  creation_hour: Date;
 
   @ManyToOne(_ => Event, event => event.tickets, { eager: true })
   event: Event;

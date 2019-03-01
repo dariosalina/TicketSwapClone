@@ -1,5 +1,5 @@
 import * as request from "superagent";
-import { isExpired } from "../jwt";
+// import { isExpired } from "../jwt";
 
 export const ADD_USER = "ADD_USER";
 export const UPDATE_USER = "UPDATE_USER";
@@ -57,6 +57,7 @@ export const login = (email, password) => dispatch =>
 export const signup = (email, password) => dispatch =>
   request
     .post(`http://localhost:4000/users`)
+    // this bc assign email and pw to first and last name in the table
     .send({ firstName: email, lastName: email, email, password })
     .then(result => {
       dispatch(userSignupSuccess());
