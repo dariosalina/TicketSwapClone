@@ -8,6 +8,7 @@ export default function CommentForm(props) {
         <input
           type="text"
           name="comment"
+          id="comment"
           onChange={props.onChange}
           value={props.values.comment}
         />

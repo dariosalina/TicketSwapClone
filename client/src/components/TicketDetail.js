@@ -122,7 +122,7 @@ class TicketDetail extends React.Component {
                 </p>
               ))}
             </span>
-            <CommentFormContainer />
+            {this.props.currentUser && <CommentFormContainer />}
           </span>
         )}
       </div>
@@ -135,7 +135,8 @@ const mapStateToProps = state => ({
   comments: state.ticket.comments,
   user: state.ticket.user,
   event: state.ticket.event,
-  tickets: state.tickets.tickets
+  tickets: state.tickets.tickets,
+  currentUser: state.currentUser
 });
 
 export default connect(

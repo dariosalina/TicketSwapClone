@@ -1,5 +1,5 @@
 import * as request from "superagent";
-// import { isExpired } from "../jwt";
+import { isExpired } from "../jwt";
 
 export const ADD_USER = "ADD_USER";
 export const UPDATE_USER = "UPDATE_USER";
@@ -36,10 +36,10 @@ const userSignupSuccess = () => ({
   type: USER_SIGNUP_SUCCESS
 });
 
-// const updateUsers = (users) => ({
-//   type: UPDATE_USERS,
-//   payload: users
-// })
+const updateUsers = users => ({
+  type: UPDATE_USERS,
+  payload: users
+});
 
 export const login = (email, password) => dispatch =>
   request
@@ -70,16 +70,16 @@ export const signup = (email, password) => dispatch =>
       }
     });
 
-// export const getUsers = () => (dispatch, getState) => {
-//   const state = getState()
-//   if (!state.currentUser) return null
-//   const jwt = state.currentUser.jwt
+export const getUsers = () => (dispatch, getState) => {
+  const state = getState();
+  if (!state.currentUser) return null;
+  const jwt = state.currentUser.jwt;
 
-//   if (isExpired(jwt)) return dispatch(logout())
+  if (isExpired(jwt)) return dispatch(logout());
 
-//   request
-//     .get(`${baseUrl}/users`)
-//     .set('Authorization', `Bearer ${jwt}`)
-//     .then(result => dispatch(updateUsers(result.body)))
-//     .catch(err => console.error(err))
-// }
+  request
+    .get(`http://localhost:4000/users`)
+    .set("Authorization", `Bearer ${jwt}`)
+    .then(result => dispatch(updateUsers(result.body)))
+    .catch(err => console.error(err));
+};

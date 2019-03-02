@@ -1,4 +1,6 @@
 import request from "superagent";
+import { isExpired } from "../jwt";
+import { logout } from "./signup";
 
 export const COMMENTS_FETCHED = "COMMENTS_FETCHED";
 export const CREATE_COMMENTS = "CREATE_COMMENTS";
@@ -24,9 +26,14 @@ export const loadComments = () => dispatch => {
 };
 
 export const createComment = comment => (dispatch, getState) => {
+  const state = getState();
+  const jwt = state.currentUser.jwt;
+
+  if (isExpired(jwt)) return dispatch(logout());
+
   request
     .post("http://localhost:4000/comments")
-    // .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .send(comment)
     .then(response => dispatch(addComment(response.body)))
     .catch(err => console.error(err));

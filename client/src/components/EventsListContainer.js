@@ -13,14 +13,16 @@ class EventsListContainer extends React.Component {
     return (
       <div>
         <EventsList events={this.props.events} />
-        <CreateEventFormContainer />
+
+        {this.props.currentUser && <CreateEventFormContainer />}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  events: state.events
+  events: state.events,
+  currentUser: state.currentUser
 });
 
 export default connect(

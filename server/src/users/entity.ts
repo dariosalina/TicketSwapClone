@@ -13,18 +13,17 @@ export default class User extends BaseEntity {
   id?: number;
 
   @IsString()
-  @Column("text", { nullable: false })
+  @Column("text")
   first_name: string;
 
   @IsString()
-  @Column("text", { nullable: false })
+  @Column("text")
   last_name: string;
 
   @IsEmail()
   @Column("text", { nullable: false })
   email: string;
 
-  // password to be finished, authentication to be done
   @IsString()
   @MinLength(5)
   @Column("text", { nullable: true })

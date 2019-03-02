@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { signup } from "../actions/signup";
+import { signup } from "../../actions/signup";
 import SignupForm from "./SignUpForm";
 import { Redirect } from "react-router-dom";
 

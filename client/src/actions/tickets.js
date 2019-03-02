@@ -1,4 +1,6 @@
 import request from "superagent";
+import { isExpired } from "../jwt";
+import { logout } from "./signup";
 
 export const ALL_TICKETS_FETCHED_EVENT = "ALL_TICKETS_FETCHED_EVENT";
 export const TICKET_FETCHED = "TICKET_FETCHED";
@@ -53,9 +55,14 @@ export const loadTicket = id => dispatch => {
 };
 
 export const createTicket = ticket => (dispatch, getState) => {
+  const state = getState();
+  const jwt = state.currentUser.jwt;
+
+  if (isExpired(jwt)) return dispatch(logout());
+
   request
     .post("http://localhost:4000/tickets")
-    // .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .send(ticket)
     .then(response => dispatch(addTicket(response.body)))
     .catch(err => console.error(err));

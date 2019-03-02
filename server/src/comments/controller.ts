@@ -1,4 +1,11 @@
-import { JsonController, Post, HttpCode, Body, Get } from "routing-controllers";
+import {
+  JsonController,
+  Post,
+  Authorized,
+  HttpCode,
+  Body,
+  Get
+} from "routing-controllers";
 import Comment from "./entity";
 
 @JsonController()
@@ -9,6 +16,7 @@ export default class CommentsController {
     return { comments };
   }
 
+  @Authorized()
   @Post("/comments")
   @HttpCode(201)
   async createPage(@Body() comment: Comment) {

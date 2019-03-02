@@ -6,10 +6,10 @@ import Home from "./components/Home";
 import EventsListContainer from "./components/EventsListContainer";
 import EventsDetailTicketList from "./components/EventDetail";
 import TicketDetail from "./components/TicketDetail";
-import LoginFormContainer from "./components/LoginFormContainer";
+import LoginFormContainer from "./components/login/LoginPage";
 import CreateEventFormContainer from "./components/EventFormContainer";
 import CreateTicketFormContainer from "./components/TicketFormContainer";
-import SignupPage from "./components/SignUpPage";
+import SignupPage from "./components/signup/SignUpPage";
 // import LogoutPage from './components/logout/LogoutPage'
 
 class App extends Component {

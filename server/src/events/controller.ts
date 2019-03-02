@@ -4,7 +4,8 @@ import {
   HttpCode,
   Get,
   Body,
-  Param
+  Param,
+  Authorized
 } from "routing-controllers";
 import Event from "./entity";
 
@@ -21,6 +22,7 @@ export default class EventsController {
     return { events };
   }
 
+  @Authorized()
   @Post("/events")
   @HttpCode(201)
   async createPage(@Body() event: Event) {

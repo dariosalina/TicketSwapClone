@@ -5,13 +5,13 @@ import EventForm from "./EventForm";
 
 class CreateEventFormContainer extends React.PureComponent {
   state = {
-    // id: "",
-    name: "",
-    picture: "",
-    dateStart: "",
-    dateEnd: "",
-    description: ""
-    // user_id: ""
+    // // id: "",
+    // name: "",
+    // picture: "",
+    // dateStart: "",
+    // dateEnd: "",
+    // description: ""
+    // // user_id: ""
   };
 
   onChange = event => {
@@ -25,13 +25,13 @@ class CreateEventFormContainer extends React.PureComponent {
     console.log(this.props);
     console.log(this.props.event);
     this.setState({
-      // id: "",
-      name: "",
-      picture: "",
-      dateStart: "",
-      dateEnd: "",
-      description: ""
-      // user_id: ""
+      // // id: "",
+      // name: "",
+      // picture: "",
+      // dateStart: "",
+      // dateEnd: "",
+      // description: ""
+      // // user_id: ""
     });
     this.props.createEvent(this.state);
   };

@@ -21,7 +21,7 @@ export default class LoginController {
   @Post("/logins")
   async authenticate(@Body() { email, password }: AuthenticatePayload) {
     const user = await User.findOne({ where: { email } });
-    if (!user)
+    if (!user || !user.id)
       throw new BadRequestError("A user with this email does not exist");
 
     if (!(await user.checkPassword(password)))
