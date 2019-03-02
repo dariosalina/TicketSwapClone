@@ -10,6 +10,7 @@ import LoginFormContainer from "./components/LoginFormContainer";
 import CreateEventFormContainer from "./components/EventFormContainer";
 import CreateTicketFormContainer from "./components/TicketFormContainer";
 import SignupPage from "./components/SignUpPage";
+// import LogoutPage from './components/logout/LogoutPage'
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path="/" exact component={Home} />
           {/* route to login page to be added */}
           <Route exact path="/signup" component={SignupPage} />
+          {/* <Route exact path="/logout" component={LogoutPage} /> */}
           <Route path="/events" exact component={EventsListContainer} />
           <Route path="/events/:id" exact component={EventsDetailTicketList} />
           <Route path="/events/tickets/:id" exact component={TicketDetail} />
