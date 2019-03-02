@@ -54,7 +54,7 @@ export const loadTicket = id => dispatch => {
 
 export const createTicket = ticket => (dispatch, getState) => {
   request
-    .post("http://localhost:4000/events")
+    .post("http://localhost:4000/tickets")
     // .set("Authorization", `Bearer ${jwt}`)
     .send(ticket)
     .then(response => dispatch(addTicket(response.body)))

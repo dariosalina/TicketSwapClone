@@ -7,7 +7,7 @@ import {
   OneToMany
 } from "typeorm";
 import { BaseEntity } from "typeorm/repository/BaseEntity";
-import { IsString, IsInt } from "class-validator";
+import { IsString } from "class-validator";
 import User from "../users/entity";
 import Event from "../events/entity";
 import Comment from "../comments/entity";
@@ -21,7 +21,7 @@ export default class Ticket extends BaseEntity {
   @Column("text", { nullable: false })
   picture: string;
 
-  @IsInt()
+  // @IsInt()
   @Column("integer", { nullable: false })
   price: number;
 

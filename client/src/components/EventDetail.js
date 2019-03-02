@@ -3,6 +3,7 @@ import { loadEvent } from "../actions/events";
 import { loadAllTicketsForEvent } from "../actions/tickets";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import CreateTicketFormContainer from "./TicketFormContainer";
 
 class EventsDetailTicketList extends React.Component {
   componentDidMount() {
@@ -32,6 +33,8 @@ class EventsDetailTicketList extends React.Component {
         <h1>{Event.name}</h1>
         {!Tickets && "Loading"}
         {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}
+
+        <CreateTicketFormContainer />
       </div>
     );
   }

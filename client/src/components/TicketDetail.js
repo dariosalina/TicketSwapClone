@@ -6,6 +6,7 @@ import {
 } from "../actions/tickets";
 // import { loadComments } from "../actions/comments";
 import { connect } from "react-redux";
+import CommentFormContainer from "./CommentFormContainer";
 
 class TicketDetail extends React.Component {
   componentDidMount() {
@@ -17,40 +18,44 @@ class TicketDetail extends React.Component {
   }
 
   // FRAUD LOGIC
-  // 1-check how many tickets the author is selling +10%, i couldnt use circular relations so i have to fetch all tickets and count how many tickets is selling the author of this one
+  // 1-check how many tickets the author is selling, if only one ticket +10%, i couldnt use circular relations so i have to fetch all tickets and count how many tickets is selling the author of this one
 
   UserRisk() {
     const Tickets = this.props.tickets;
     const userId = this.props.ticket.user.id;
     const usersIdArray = Tickets.map(ticket => ticket.user.id);
     const ticketsPerAuth = usersIdArray.filter(x => x === userId);
+    console.log(ticketsPerAuth.length);
     if (ticketsPerAuth.length === 1) {
       return 10;
     }
+    return 0;
   }
   // 2- check the average price for the tickets +-X is the percentage higher od lower than the avg, add X% to the risk
   PriceRisk() {
     const Tickets = this.props.tickets;
-    const eventId = this.props.ticket.event.id;
-    const TicketPrice = this.props.ticket.price;
-    const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
-    const averagePrice =
-      ticketsPerEvent
-        .map(t => t.price)
-        .reduce((price1, price2) => price1 + price2) / ticketsPerEvent.length;
-    console.log(eventId, TicketPrice, ticketsPerEvent, averagePrice);
-    if (TicketPrice >= averagePrice) {
-      console.log(((TicketPrice - averagePrice) / TicketPrice) * 100);
-      return -Math.round(((TicketPrice - averagePrice) / TicketPrice) * 100);
-    } else {
-      console.log(((averagePrice - TicketPrice) / averagePrice) * 100);
-      return +Math.round(((averagePrice - TicketPrice) / averagePrice) * 100);
+    if (Tickets !== undefined) {
+      const eventId = this.props.ticket.event.id;
+      const TicketPrice = this.props.ticket.price;
+      const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
+      const averagePrice =
+        ticketsPerEvent
+          .map(t => t.price)
+          .reduce((price1, price2) => price1 + price2) / ticketsPerEvent.length;
+
+      if (TicketPrice >= averagePrice) {
+        // console.log(((TicketPrice - averagePrice) / TicketPrice) * 100);
+        return -Math.round(((TicketPrice - averagePrice) / TicketPrice) * 100);
+      } else {
+        // console.log(((averagePrice - TicketPrice) / averagePrice) * 100);
+        return +Math.round(((averagePrice - TicketPrice) / averagePrice) * 100);
+      }
     }
   }
   //3- check the time: if creationdate is between 9-17 -10%, else +10%
   CreationTimeRisk() {
     const creationHour = this.props.ticket.creation_hour.slice(11, 13);
-    console.log(creationHour);
+    // console.log(creationHour);
     if (creationHour > 9 && creationHour < 17) {
       return -10;
     } else {
@@ -60,9 +65,30 @@ class TicketDetail extends React.Component {
   //4-che how many comments, more than 3 add 5%
   NumberCommentsRisk() {
     const commentsNum = this.props.ticket.comments;
-    console.log(commentsNum);
+    // console.log(commentsNum);
     if (commentsNum > 3) {
       return 5;
+    }
+    return 0;
+  }
+  //5 - calculate final risk
+  TotalRisk() {
+    console.log(this.PriceRisk());
+    console.log(this.UserRisk());
+    console.log(this.CreationTimeRisk());
+    console.log(this.NumberCommentsRisk());
+
+    const totalRisk =
+      this.PriceRisk() +
+      this.UserRisk() +
+      this.CreationTimeRisk() +
+      this.NumberCommentsRisk();
+    if (totalRisk < 5) {
+      return 5;
+    } else if (totalRisk > 95) {
+      return 95;
+    } else {
+      return totalRisk;
     }
   }
 
@@ -83,12 +109,7 @@ class TicketDetail extends React.Component {
             <h3>Event: {Event.name}</h3>
             <p>{Ticket.description}</p>
             <p>{Ticket.price}</p>
-            <p>
-              {this.PriceRisk()}
-              {this.UserRisk()}
-              {this.CreationTimeRisk()}
-              {this.NumberCommentsRisk()}
-            </p>
+            <p>{this.TotalRisk()}</p>
             <img alt={"ticket"} src={Ticket.picture} width={100} />
 
             <p>Sold by:{User.first_name}</p>
@@ -101,6 +122,7 @@ class TicketDetail extends React.Component {
                 </p>
               ))}
             </span>
+            <CommentFormContainer />
           </span>
         )}
       </div>

@@ -26,14 +26,15 @@ export default function TicketForm(props) {
       <label>
         Price:
         <input
-          type="text"
+          type="number"
           name="price"
           onChange={props.onChange}
           value={props.values.price}
         />
       </label>
 
-      <label>
+      {/* event must be linked taking id parameter of the page */}
+      {/* <label>
         Event:
         <input
           type="text"
@@ -41,7 +42,7 @@ export default function TicketForm(props) {
           onChange={props.onChange}
           value={props.values.event_id}
         />
-      </label>
+      </label> */}
 
       <button type="submit" className="btn">
         Save
