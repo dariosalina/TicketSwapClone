@@ -7,10 +7,11 @@ import { Redirect } from "react-router-dom";
 class LoginPage extends PureComponent {
   handleSubmit = data => {
     this.props.login(data.email, data.password);
+    // location.href = "/events";
   };
 
   render() {
-    if (this.props.currentUser) return <Redirect to="/" />;
+    if (this.props.currentUser) return <Redirect to="/events" />;
 
     return (
       <div>

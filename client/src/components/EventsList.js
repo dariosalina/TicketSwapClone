@@ -20,7 +20,10 @@ export default class EventsList extends React.Component {
   }
 
   render() {
-    const Events = this.props.events;
+    const Events =
+      this.props.events.length === 0
+        ? this.props.events
+        : this.props.events.filter(x => new Date(x.end_date) > new Date());
     const pageCount = 9 * (this.state.page + 1);
     return (
       <div>
@@ -29,19 +32,23 @@ export default class EventsList extends React.Component {
         {!Events && "Loading"}
         {Events && (
           <ul>
-            {Events.slice(9 * this.state.page, pageCount)
-              .filter(x => new Date(x.end_date) > new Date())
-              .map(this.renderEventList)}
+            {Events.slice(9 * this.state.page, pageCount).map(
+              this.renderEventList
+            )}
           </ul>
         )}
 
         {Events.length > pageCount && (
-          <button onClick={() => this.setState(s => ({ page: s.page + 1 }))}>
+          <button
+            onClick={() => this.setState(state => ({ page: state.page + 1 }))}
+          >
             Next
           </button>
         )}
         {!!this.state.page && (
-          <button onClick={() => this.setState(s => ({ page: s.page - 1 }))}>
+          <button
+            onClick={() => this.setState(state => ({ page: state.page - 1 }))}
+          >
             Previous
           </button>
         )}

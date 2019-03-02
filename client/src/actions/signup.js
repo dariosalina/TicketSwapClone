@@ -58,7 +58,7 @@ export const signup = (email, password) => dispatch =>
   request
     .post(`http://localhost:4000/users`)
     // this bc assign email and pw to first and last name in the table
-    .send({ firstName: email, lastName: email, email, password })
+    .send({ first_name: email, last_name: email, email, password })
     .then(result => {
       dispatch(userSignupSuccess());
     })

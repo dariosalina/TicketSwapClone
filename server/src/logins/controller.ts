@@ -28,7 +28,7 @@ export default class LoginController {
       throw new BadRequestError("The password is not correct");
     // send back a jwt token
     const jwt = sign({ id: user.id! });
-    return { jwt };
+    return { jwt, id: user.id };
     // else: send some HTTP 400 Bad request error
   }
 }

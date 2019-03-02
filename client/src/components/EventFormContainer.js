@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { createEvent } from "../actions/events";
 import EventForm from "./EventForm";
+import { Redirect } from "react-router-dom";
 
 class CreateEventFormContainer extends React.PureComponent {
   state = {
@@ -12,6 +13,7 @@ class CreateEventFormContainer extends React.PureComponent {
     // dateEnd: "",
     // description: ""
     // // user_id: ""
+    redirect: false
   };
 
   onChange = event => {
@@ -22,21 +24,18 @@ class CreateEventFormContainer extends React.PureComponent {
 
   onSubmit = event => {
     event.preventDefault();
-    console.log(this.props);
-    console.log(this.props.event);
-    this.setState({
-      // // id: "",
-      // name: "",
-      // picture: "",
-      // dateStart: "",
-      // dateEnd: "",
-      // description: ""
-      // // user_id: ""
-    });
     this.props.createEvent(this.state);
+    this.setState({
+      redirect: true
+    });
   };
 
   render() {
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to="/events" />;
+    }
     return (
       <EventForm
         onSubmit={this.onSubmit}
@@ -51,11 +50,3 @@ export default connect(
   null,
   { createEvent }
 )(CreateEventFormContainer);
-
-// id: this.props.event ? this.props.event.id : null,
-//     name: this.props.event ? this.props.event.name : "",
-//     imageUrl: this.props.event ? this.props.event.imageUrl : "",
-//     dateStart: this.props.event ? this.props.event.dateStart : "",
-//     dateEnd: this.props.event ? this.props.event.dateEnd : "",
-//     description: this.props.event ? this.props.event.description : "",
-//     user: this.props.user ? this.props.user.id : ""

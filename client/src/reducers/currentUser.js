@@ -4,9 +4,9 @@ const localStorageJwtKey = "currentUserJwt";
 
 let initialState = null;
 try {
-  const jwt = localStorage.getItem(localStorageJwtKey);
+  const jwt = JSON.parse(localStorage.getItem(localStorageJwtKey));
   if (jwt) {
-    initialState = { jwt };
+    initialState = { ...jwt };
   }
 } catch (e) {
   console.log(`Error retrieving data from local storage`, e);

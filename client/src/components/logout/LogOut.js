@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { logout } from "../../actions/users";
+import { logout } from "../../actions/signup";
 import { Redirect } from "react-router-dom";
 
 class LogoutPage extends PureComponent {
