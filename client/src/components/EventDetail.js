@@ -2,7 +2,8 @@ import React from "react";
 import { loadEvent } from "../actions/events";
 import { loadAllTicketsForEvent } from "../actions/tickets";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import CreateTicketFormContainer from "./TicketFormContainer";
 
 class EventsDetailTicketList extends React.Component {
   componentDidMount() {
@@ -11,29 +12,29 @@ class EventsDetailTicketList extends React.Component {
     this.props.loadAllTicketsForEvent(id);
   }
 
-  renderTicketList(ticket, event){
+  renderTicketList(ticket, event) {
     return (
       <li key={ticket.id}>
-      <Link to={`tickets/${ticket.id}`}>
-        <p className="title">{event.name}</p>
-         <p>{ticket.description}</p>
-         </Link>
+        <Link to={`tickets/${ticket.id}`}>
+          <p className="title">{event.name}</p>
+          <p>{ticket.description}</p>
+        </Link>
       </li>
     );
   }
-  
 
   render() {
-    const Event = this.props.event
+    const Event = this.props.event;
     const Tickets = this.props.tickets;
-    
+    console.log(Tickets);
     return (
-
       // event information to be added! move info from list to here and display
       <div>
         <h1>{Event.name}</h1>
         {!Tickets && "Loading"}
         {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}
+
+        <CreateTicketFormContainer />
       </div>
     );
   }

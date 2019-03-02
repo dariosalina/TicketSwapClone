@@ -1,14 +1,13 @@
-import { JsonController, Post, HttpCode, Body } from "routing-controllers";
+import { JsonController, Post, HttpCode, Body, Get } from "routing-controllers";
 import Comment from "./entity";
 
 @JsonController()
 export default class CommentsController {
-  // @Get("/comments/")
-  // async allComments() {
-
-  //   const comments = await Comment.find();
-  //         return {comments}
-  // }
+  @Get("/comments/")
+  async allComments() {
+    const comments = await Comment.find();
+    return { comments };
+  }
 
   @Post("/comments")
   @HttpCode(201)
