@@ -26,7 +26,7 @@ class EventsDetailTicketList extends React.Component {
   render() {
     const Event = this.props.event;
     const Tickets = this.props.tickets;
-
+    console.log(this.props);
     return (
       // event information to be added! move info from list to here and display
       <div>
