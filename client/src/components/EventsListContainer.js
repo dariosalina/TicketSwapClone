@@ -2,7 +2,6 @@ import React from "react";
 import { loadEvents } from "../actions/events";
 import { connect } from "react-redux";
 import EventsList from "./EventsList";
-import CreateEventFormContainer from "./EventFormContainer";
 import { Link } from "react-router-dom";
 
 class EventsListContainer extends React.Component {
@@ -12,7 +11,7 @@ class EventsListContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div class="mw6 center">
         {this.props.currentUser && (
           <Link to={`/createevents`}>Create New Event</Link>
         )}

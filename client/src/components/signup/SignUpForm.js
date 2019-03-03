@@ -18,47 +18,68 @@ export default class SignupForm extends PureComponent {
 
   render() {
     return (
-      <div className="signup-form">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={this.state.email || ""}
-              onChange={this.handleChange}
-            />
-          </label>
+      <article class="pa4 black-80">
+        <form
+          action="sign-up_submit"
+          method="get"
+          accept-charset="utf-8"
+          onSubmit={this.handleSubmit}
+        >
+          <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+            <legend class="ph0 mh0 fw6 clip">Sign Up</legend>
+            <div class="mt3">
+              <label class="db fw4 lh-copy f6" for="email-address">
+                Email address
+              </label>
+              <input
+                class="pa2 input-reset ba bg-transparent w-100 measure"
+                type="email"
+                name="email"
+                value={this.state.email || ""}
+                onChange={this.handleChange}
+              />
+            </div>
 
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={this.state.password || ""}
-              onChange={this.handleChange}
-            />
-          </label>
+            <div class="mt3">
+              <label class="db fw4 lh-copy f6" for="password">
+                Password
+              </label>
 
-          <label>
-            Confirm password
-            <input
-              type="password"
-              name="confirmPassword"
-              value={this.state.confirmPassword || ""}
-              onChange={this.handleChange}
-            />
-          </label>
+              <input
+                class="b pa2 input-reset ba bg-transparent"
+                type="password"
+                name="password"
+                value={this.state.password || ""}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div class="mt3">
+              <label class="db fw4 lh-copy f6" for="password">
+                Confirm Password
+              </label>
+              <input
+                class="b pa2 input-reset ba bg-transparent"
+                type="password"
+                name="confirmPassword"
+                value={this.state.confirmPassword || ""}
+                onChange={this.handleChange}
+              />
+            </div>
+            {this.state.password &&
+              this.state.confirmPassword &&
+              this.state.password !== this.state.confirmPassword && (
+                <p style={{ color: "red" }}>The passwords do not match!</p>
+              )}
 
-          {this.state.password &&
-            this.state.confirmPassword &&
-            this.state.password !== this.state.confirmPassword && (
-              <p style={{ color: "red" }}>The passwords do not match!</p>
-            )}
-
-          <button type="submit">Sign up</button>
+            <button
+              class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
+              type="submit"
+            >
+              Sign up
+            </button>
+          </fieldset>
         </form>
-      </div>
+      </article>
     );
   }
 }
