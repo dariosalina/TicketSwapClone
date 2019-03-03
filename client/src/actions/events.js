@@ -44,7 +44,7 @@ export const createEvent = event => (dispatch, getState) => {
   const state = getState();
   const jwt = state.currentUser.jwt;
   event.user = state.currentUser.id;
-  console.log(event.user);
+
   delete event.redirect;
   if (isExpired(jwt)) return dispatch(logout());
 

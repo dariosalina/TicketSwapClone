@@ -2,9 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { createTicket } from "../actions/tickets";
 import TicketForm from "./TicketForm";
+import { Redirect } from "react-router-dom";
 
 class CreateTicketFormContainer extends React.PureComponent {
-  state = {};
+  state = {
+    redirect: false
+  };
 
   onChange = event => {
     this.setState({
@@ -15,11 +18,18 @@ class CreateTicketFormContainer extends React.PureComponent {
   onSubmit = event => {
     event.preventDefault();
 
-    this.setState({});
+    this.setState({
+      redirect: true
+    });
     this.props.createTicket(this.state);
   };
 
   render() {
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to="/events" />;
+    }
     return (
       <TicketForm
         onSubmit={this.onSubmit}

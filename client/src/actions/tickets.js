@@ -59,6 +59,7 @@ export const createTicket = ticket => (dispatch, getState) => {
   const jwt = state.currentUser.jwt;
   ticket.user = state.currentUser.id;
   ticket.event = state.event.id;
+  delete ticket.redirect;
   if (isExpired(jwt)) return dispatch(logout());
 
   request
