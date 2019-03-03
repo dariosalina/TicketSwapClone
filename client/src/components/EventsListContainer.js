@@ -3,6 +3,7 @@ import { loadEvents } from "../actions/events";
 import { connect } from "react-redux";
 import EventsList from "./EventsList";
 import CreateEventFormContainer from "./EventFormContainer";
+import { Link } from "react-router-dom";
 
 class EventsListContainer extends React.Component {
   componentDidMount() {
@@ -12,15 +13,18 @@ class EventsListContainer extends React.Component {
   render() {
     return (
       <div>
+        {this.props.currentUser && (
+          <Link to={`/createevents`}>Create New Event</Link>
+        )}
         <EventsList events={this.props.events} />
-        <CreateEventFormContainer />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  events: state.events
+  events: state.events,
+  currentUser: state.currentUser
 });
 
 export default connect(

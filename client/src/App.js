@@ -6,33 +6,34 @@ import Home from "./components/Home";
 import EventsListContainer from "./components/EventsListContainer";
 import EventsDetailTicketList from "./components/EventDetail";
 import TicketDetail from "./components/TicketDetail";
-import LoginFormContainer from "./components/LoginFormContainer";
+import LoginFormContainer from "./components/login/LoginPage";
 import CreateEventFormContainer from "./components/EventFormContainer";
 import CreateTicketFormContainer from "./components/TicketFormContainer";
-import SignupPage from "./components/SignUpPage";
-// import LogoutPage from './components/logout/LogoutPage'
+import SignupPage from "./components/signup/SignUpPage";
+import LogoutPage from "./components/logout/LogOut";
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <div>
-          <Route path="/" exact component={Home} />
+          <h1>Uber4Tickets</h1>
+          <Route path="/" component={Home} />
           {/* route to login page to be added */}
-          <Route exact path="/signup" component={SignupPage} />
-          {/* <Route exact path="/logout" component={LogoutPage} /> */}
-          <Route path="/events" exact component={EventsListContainer} />
-          <Route path="/events/:id" exact component={EventsDetailTicketList} />
-          <Route path="/events/tickets/:id" exact component={TicketDetail} />
-          <Route path="/login" exact component={LoginFormContainer} />
+          <Route path="/signup" component={SignupPage} />
+          <Route exact path="/logout" component={LogoutPage} />
+          <Route exact path="/events" component={EventsListContainer} />
+          <Route exact path="/events/:id" component={EventsDetailTicketList} />
+          <Route exact path="/events/tickets/:id" component={TicketDetail} />
+          <Route exact path="/login" component={LoginFormContainer} />
           <Route
-            path="/createevents"
             exact
+            path="/createevents"
             component={CreateEventFormContainer}
           />
           <Route
-            path="/createtickets"
             exact
+            path="/createtickets"
             component={CreateTicketFormContainer}
           />
         </div>

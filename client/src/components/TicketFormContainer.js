@@ -4,14 +4,7 @@ import { createTicket } from "../actions/tickets";
 import TicketForm from "./TicketForm";
 
 class CreateTicketFormContainer extends React.PureComponent {
-  state = {
-    // // id: "",
-    // picture: "",
-    // price: 0,
-    // description: "",
-    // event_id: ""
-    // // user_id: ""
-  };
+  state = {};
 
   onChange = event => {
     this.setState({
@@ -22,14 +15,7 @@ class CreateTicketFormContainer extends React.PureComponent {
   onSubmit = event => {
     event.preventDefault();
 
-    this.setState({
-      // // id: "",
-      // picture: "",
-      // price: 0,
-      // description: "",
-      // event_id: ""
-      // // user_id: ""
-    });
+    this.setState({});
     this.props.createTicket(this.state);
   };
 

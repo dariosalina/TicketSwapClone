@@ -1,6 +1,6 @@
 import request from "superagent";
-// import { isExpired } from "../jwt";
-// import { logout } from "./users";
+import { isExpired } from "../jwt";
+import { logout } from "./signup";
 
 export const EVENTS_FETCHED = "EVENTS_FETCHED";
 export const EVENT_FETCHED = "EVENT_FETCHED";
@@ -34,20 +34,23 @@ export const loadEvent = id => dispatch => {
   request
     .get(`http://localhost:4000/events/${id}`)
     .then(response => {
+      console.log(response.body);
       dispatch(eventFetched(response.body));
     })
     .catch(console.error);
 };
 
 export const createEvent = event => (dispatch, getState) => {
-  // const state = getState();
-  // const jwt = state.currentUser.jwt;
-
-  // if (isExpired(jwt)) return dispatch(logout());
+  const state = getState();
+  const jwt = state.currentUser.jwt;
+  event.user = state.currentUser.id;
+  console.log(event.user);
+  delete event.redirect;
+  if (isExpired(jwt)) return dispatch(logout());
 
   request
     .post("http://localhost:4000/events")
-    // .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .send(event)
     .then(response => dispatch(addEvent(response.body)))
     .catch(err => console.error(err));

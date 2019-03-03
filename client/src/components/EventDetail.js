@@ -26,15 +26,19 @@ class EventsDetailTicketList extends React.Component {
   render() {
     const Event = this.props.event;
     const Tickets = this.props.tickets;
-    console.log(Tickets);
+
     return (
       // event information to be added! move info from list to here and display
       <div>
-        <h1>{Event.name}</h1>
-        {!Tickets && "Loading"}
-        {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}
+        {!Event && "Loading..."}
+        {Event && <h1>{Event.name}</h1>}
+        {this.props.currentUser && (
+          <Link to={`/createtickets`}>Create New Tickett</Link>
+        )}
 
-        <CreateTicketFormContainer />
+        {!Tickets && "Loading..."}
+
+        {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}
       </div>
     );
   }
@@ -42,7 +46,8 @@ class EventsDetailTicketList extends React.Component {
 
 const mapStateToProps = state => ({
   event: state.event,
-  tickets: state.tickets
+  tickets: state.tickets,
+  currentUser: state.currentUser
 });
 
 export default connect(
