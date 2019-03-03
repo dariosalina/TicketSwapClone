@@ -122,12 +122,17 @@ class TicketDetail extends React.Component {
               </div>
             </article>
 
-            <span>
+            <span class="mw6 center">
               Comments:
               {Ticket.comments.map(comment => (
-                <p key={comment.id}>
-                  {comment.comment} by {comment.user.first_name}
-                </p>
+                <div class="dtc v-mid pl3" key={comment.id}>
+                  <h1 class="f6 f5-ns fw6 lh-title black mv0">
+                    {comment.comment}
+                  </h1>
+                  <h2 class="f6 fw4 mt0 mb0 black-60">
+                    by {comment.user.first_name}
+                  </h2>
+                </div>
               ))}
             </span>
             {this.props.currentUser && <CommentFormContainer />}
