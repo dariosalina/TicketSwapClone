@@ -31,7 +31,6 @@ export const loadAllTicketsForEvent = eventId => dispatch => {
   request
     .get(`http://localhost:4000/events/tickets/${eventId}`)
     .then(response => {
-      console.log(response.body);
       dispatch(ticketsFetched(response.body));
     })
     .catch(console.error);
@@ -41,7 +40,6 @@ export const loadTickets = () => dispatch => {
   request
     .get(`http://localhost:4000/tickets`)
     .then(response => {
-      console.log(response.body);
       dispatch(retrieveAllTickets(response.body));
     })
     .catch(console.error);

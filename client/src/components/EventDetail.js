@@ -7,7 +7,6 @@ import CreateTicketFormContainer from "./TicketFormContainer";
 
 class EventsDetailTicketList extends React.Component {
   componentDidMount() {
-    console.log(this.props);
     const id = this.props.match.params.id;
     this.props.loadEvent(id);
     this.props.loadAllTicketsForEvent(id);
@@ -28,8 +27,6 @@ class EventsDetailTicketList extends React.Component {
     const Event = this.props.event;
     const Tickets = this.props.tickets;
 
-    console.log(this.props);
-    console.log(Event);
     return (
       // event information to be added! move info from list to here and display
       <div>
@@ -38,7 +35,8 @@ class EventsDetailTicketList extends React.Component {
         {this.props.currentUser && (
           <Link to={`/createtickets`}>Create New Tickett</Link>
         )}
-        {!Tickets && "Loading"}
+
+        {!Tickets && "Loading..."}
 
         {Tickets && <ul>{Tickets.map(this.renderTicketList)}</ul>}
       </div>

@@ -19,7 +19,6 @@ export const loadComments = ticket_id => dispatch => {
   request
     .get(`http://localhost:4000/comments/${ticket_id}`)
     .then(response => {
-      console.log(response.body);
       dispatch(commentsFetched(response.body));
     })
     .catch(console.error);

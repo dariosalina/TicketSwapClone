@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import CommentFormContainer from "./CommentFormContainer";
 
 class TicketDetail extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     const id = this.props.match.params.id;
     this.props.loadTicket(id);
 
@@ -26,7 +26,7 @@ class TicketDetail extends React.Component {
       const userId = this.props.ticket.user.id;
       const usersIdArray = Tickets.map(ticket => ticket.user.id);
       const ticketsPerAuth = usersIdArray.filter(x => x === userId);
-      console.log(ticketsPerAuth.length);
+
       if (ticketsPerAuth.length === 1) {
         return 10;
       }
@@ -36,9 +36,9 @@ class TicketDetail extends React.Component {
   // 2- check the average price for the tickets +-X is the percentage higher od lower than the avg, add X% to the risk
   PriceRisk() {
     const Tickets = this.props.tickets.tickets;
-
+    const Ticket = this.props.ticket;
     if (Tickets !== undefined) {
-      const eventId = this.props.ticket.event.id;
+      const eventId = Ticket.event.id;
       const TicketPrice = this.props.ticket.price;
       const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
       const averagePrice =
@@ -55,11 +55,14 @@ class TicketDetail extends React.Component {
   }
   //3- check the time: if creationdate is between 9-17 -10%, else +10%
   CreationTimeRisk() {
-    const creationHour = this.props.ticket.creation_hour.slice(11, 13);
-    if (creationHour > 9 && creationHour < 17) {
-      return -10;
-    } else {
-      return 10;
+    const Ticket = this.props.ticket;
+    if (Ticket) {
+      const creationHour = Ticket.creation_hour.slice(11, 13);
+      if (creationHour > 9 && creationHour < 17) {
+        return -10;
+      } else {
+        return 10;
+      }
     }
   }
   //4-che how many comments, more than 3 add 5%
@@ -73,17 +76,19 @@ class TicketDetail extends React.Component {
   }
   //5 - calculate final risk
   TotalRisk() {
-    const totalRisk =
-      this.PriceRisk() +
-      this.UserRisk() +
-      this.CreationTimeRisk() +
-      this.NumberCommentsRisk();
-    if (totalRisk < 5) {
-      return 5;
-    } else if (totalRisk > 95) {
-      return 95;
-    } else {
-      return totalRisk;
+    if (this.props.ticket !== undefined) {
+      const totalRisk =
+        this.PriceRisk() +
+        this.UserRisk() +
+        this.CreationTimeRisk() +
+        this.NumberCommentsRisk();
+      if (totalRisk < 5) {
+        return 5;
+      } else if (totalRisk > 95) {
+        return 95;
+      } else {
+        return totalRisk;
+      }
     }
   }
 
@@ -91,17 +96,19 @@ class TicketDetail extends React.Component {
     const Ticket = this.props.ticket;
     const User = this.props.user;
     const Event = this.props.event;
+
     return (
       // event information to be added! move info from list to here and display
       <div>
         <h1>Details:</h1>
         {!Ticket && !User && !Event && "Loading"}
+
         {Ticket && User && Event && (
           <span>
             <h3>Event: {Event.name}</h3>
             <p>{Ticket.description}</p>
             <p>{Ticket.price}</p>
-            <p>{this.TotalRisk()}</p>
+            <p>{this.TotalRisk()}%</p>
             <img alt={"ticket"} src={Ticket.picture} width={100} />
 
             <p>Sold by:{User.first_name}</p>
