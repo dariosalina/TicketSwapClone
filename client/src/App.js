@@ -16,8 +16,10 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
-          <h1>Uber4Tickets</h1>
+        <div class="pa3 pa4-ns">
+          <h1 class="link dim black b f1 f-headline-ns tc db mb3 mb4-ns">
+            Uber4Tickets
+          </h1>
           <Route path="/" component={Home} />
           {/* route to login page to be added */}
           <Route path="/signup" component={SignupPage} />

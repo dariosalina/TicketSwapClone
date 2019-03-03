@@ -7,15 +7,22 @@ export default class EventsList extends React.Component {
   };
   renderEventList(event) {
     return (
-      <li key={event.id}>
-        <p className="title">
-          <Link to={`/events/${event.id}`}>{event.name}</Link>
-        </p>
-        <p>{event.description}</p>
-        <p>
-          From: {event.start_date} to: {event.end_date}
-        </p>
-      </li>
+      <article>
+        <div class="dtc w3">
+          <img src={event.picture} class="db w-100" />
+        </div>
+        <div class="dtc v-top pl2">
+          <h1 class="f6 f5-ns fw6 lh-title black mv0">
+            <Link to={`/events/${event.id}`}>{event.name}</Link>
+          </h1>
+          <h2 class="f6 fw4 mt2 mb0 black-60">{event.description}</h2>
+          <dl class="mt2 f6">
+            <dd class="ml0">From: {event.start_date}</dd>
+
+            <dd class="ml0"> to:{event.end_date}</dd>
+          </dl>
+        </div>
+      </article>
     );
   }
 
@@ -26,16 +33,16 @@ export default class EventsList extends React.Component {
         : this.props.events.filter(x => new Date(x.end_date) > new Date());
     const pageCount = 9 * (this.state.page + 1);
     return (
-      <div>
+      <div class="mw6 center">
         <h1>Here you can find a list of events:</h1>
         <h3> Click on the title to see the details</h3>
         {!Events && "Loading"}
         {Events && (
-          <ul>
+          <div>
             {Events.slice(9 * this.state.page, pageCount).map(
               this.renderEventList
             )}
-          </ul>
+          </div>
         )}
 
         {Events.length > pageCount && (

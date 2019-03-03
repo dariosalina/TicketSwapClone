@@ -99,26 +99,40 @@ class TicketDetail extends React.Component {
 
     return (
       // event information to be added! move info from list to here and display
-      <div>
+      <div class="mw6 center">
         <h1>Details:</h1>
         {!Ticket && !User && !Event && "Loading"}
 
         {Ticket && User && Event && (
           <span>
-            <h3>Event: {Event.name}</h3>
-            <p>{Ticket.description}</p>
-            <p>{Ticket.price}</p>
-            <p>{this.TotalRisk()}%</p>
-            <img alt={"ticket"} src={Ticket.picture} width={100} />
+            <article>
+              <div class="dtc w3">
+                <img alt={"ticket"} src={Ticket.picture} class="db w-200" />
+              </div>
+              <div class="dtc v-top pl2">
+                <h1 class="f6 f5-ns fw6 lh-title black mv0">
+                  Event: {Event.name}{" "}
+                </h1>
+                <h2 class="f6 fw4 mt2 mb0 black-60">{Ticket.description}</h2>
+                <dl class="mt2 f6">
+                  <dd class="ml0">{Ticket.price} euro</dd>
+                  <dd class="ml0">Sold by: {User.first_name}</dd>
+                  <dd class="ml0"> {this.TotalRisk()}%</dd>
+                </dl>
+              </div>
+            </article>
 
-            <p>Sold by:{User.first_name}</p>
-
-            <span>
+            <span class="mw6 center">
               Comments:
               {Ticket.comments.map(comment => (
-                <p key={comment.id}>
-                  {comment.comment} by {comment.user.first_name}
-                </p>
+                <div class="dtc v-mid pl3" key={comment.id}>
+                  <h1 class="f6 f5-ns fw6 lh-title black mv0">
+                    {comment.comment}
+                  </h1>
+                  <h2 class="f6 fw4 mt0 mb0 black-60">
+                    by {comment.user.first_name}
+                  </h2>
+                </div>
               ))}
             </span>
             {this.props.currentUser && <CommentFormContainer />}

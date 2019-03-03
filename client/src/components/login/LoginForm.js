@@ -18,31 +18,51 @@ export default class LoginForm extends PureComponent {
 
   render() {
     return (
-      <div className="login-form">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={this.state.email || ""}
-              onChange={this.handleChange}
-            />
-          </label>
+      <article class="pa4 black-80">
+        <form
+          action="sign-up_submit"
+          method="get"
+          accept-charset="utf-8"
+          onSubmit={this.handleSubmit}
+        >
+          <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+            <div class="mt3">
+              <label class="db fw4 lh-copy f6" for="email-address">
+                Email address
+              </label>
 
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={this.state.password || ""}
-              onChange={this.handleChange}
-            />
-          </label>
+              <input
+                class="pa2 input-reset ba bg-transparent w-100 measure"
+                type="email"
+                name="email"
+                value={this.state.email || ""}
+                onChange={this.handleChange}
+              />
+            </div>
 
-          <button type="submit">Login</button>
+            <div class="mt3">
+              <label class="db fw4 lh-copy f6" for="password">
+                Password
+              </label>
+
+              <input
+                class="b pa2 input-reset ba bg-transparent"
+                type="password"
+                name="password"
+                value={this.state.password || ""}
+                onChange={this.handleChange}
+              />
+            </div>
+
+            <button
+              class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6"
+              type="submit"
+            >
+              Login
+            </button>
+          </fieldset>
         </form>
-      </div>
+      </article>
     );
   }
 }
