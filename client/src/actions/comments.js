@@ -15,9 +15,9 @@ const addComment = comment => ({
   comment
 });
 
-export const loadComments = () => dispatch => {
+export const loadComments = ticket_id => dispatch => {
   request
-    .get(`http://localhost:4000/comments`)
+    .get(`http://localhost:4000/comments/${ticket_id}`)
     .then(response => {
       console.log(response.body);
       dispatch(commentsFetched(response.body));
@@ -28,7 +28,8 @@ export const loadComments = () => dispatch => {
 export const createComment = comment => (dispatch, getState) => {
   const state = getState();
   const jwt = state.currentUser.jwt;
-
+  comment.user = state.currentUser.id;
+  comment.ticket = state.ticket.id;
   if (isExpired(jwt)) return dispatch(logout());
 
   request

@@ -6,13 +6,6 @@ import { Redirect } from "react-router-dom";
 
 class CreateEventFormContainer extends React.PureComponent {
   state = {
-    // // id: "",
-    // name: "",
-    // picture: "",
-    // dateStart: "",
-    // dateEnd: "",
-    // description: ""
-    // // user_id: ""
     redirect: false
   };
 

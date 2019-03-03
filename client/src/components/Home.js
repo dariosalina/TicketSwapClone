@@ -15,7 +15,7 @@ export default function Home(props) {
       <Link to={`/login`}>Login</Link>
       <Link to={`/events`}>Events</Link>
       <Link to={`/logout`}> LogOut</Link>
-      <Link to={`/tickets`}>Tickets</Link>
+      {/* <Link to={`/tickets`}>Tickets</Link> */}
       {/* <Route path="/events" component={EventsListContainer} />
       <Route path="/events/:id" component={EventsDetailTicketList} />
       <Route path="/events/tickets/:id" component={TicketDetail} />

@@ -22,12 +22,20 @@ class App extends Component {
           {/* route to login page to be added */}
           <Route path="/signup" component={SignupPage} />
           <Route exact path="/logout" component={LogoutPage} />
-          <Route path="/events" component={EventsListContainer} />
-          <Route path="/events/:id" component={EventsDetailTicketList} />
-          <Route path="/events/tickets/:id" component={TicketDetail} />
-          <Route path="/login" component={LoginFormContainer} />
-          <Route path="/createevents" component={CreateEventFormContainer} />
-          <Route path="/createtickets" component={CreateTicketFormContainer} />
+          <Route exact path="/events" component={EventsListContainer} />
+          <Route exact path="/events/:id" component={EventsDetailTicketList} />
+          <Route exact path="/events/tickets/:id" component={TicketDetail} />
+          <Route exact path="/login" component={LoginFormContainer} />
+          <Route
+            exact
+            path="/createevents"
+            component={CreateEventFormContainer}
+          />
+          <Route
+            exact
+            path="/createtickets"
+            component={CreateTicketFormContainer}
+          />
         </div>
       </Provider>
     );

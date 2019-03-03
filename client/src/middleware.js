@@ -5,6 +5,7 @@ const localStorageJwtKey = "currentUserJwt";
 export const storeJwt = store => next => action => {
   try {
     if (action.type === USER_LOGIN_SUCCESS) {
+      // i can store in the local storage also the user id
       localStorage.setItem(localStorageJwtKey, JSON.stringify(action.payload));
     }
     if (action.type === USER_LOGOUT) {

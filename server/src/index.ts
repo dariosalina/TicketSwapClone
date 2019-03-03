@@ -4,7 +4,7 @@ import setupDb from "./db";
 import UsersController from "./users/controller";
 import EventsController from "./events/controller";
 import TicketsController from "./tickets/controller";
-import CommentsController from "./events/controller";
+import CommentsController from "./comments/controller";
 import LoginController from "./logins/controller";
 import { verify } from "./jwt";
 import User from "./users/entity";

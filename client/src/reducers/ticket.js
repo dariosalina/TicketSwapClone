@@ -5,7 +5,7 @@ export default function(state = [], action) {
     case TICKET_FETCHED:
       return action.ticket;
     case ADD_TICKET:
-      return [...state, action.payload];
+      return [...state, action.ticket];
     default:
       return state;
   }
