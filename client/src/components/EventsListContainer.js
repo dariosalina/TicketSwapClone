@@ -5,8 +5,11 @@ import EventsList from "./EventsList";
 import { Link } from "react-router-dom";
 
 class EventsListContainer extends React.Component {
+  state = {
+    page: 1
+  };
   componentDidMount() {
-    this.props.loadEvents();
+    this.props.loadEvents(this.state.page);
   }
 
   render() {
@@ -16,6 +19,30 @@ class EventsListContainer extends React.Component {
           <Link to={`/createevents`}>Create New Event</Link>
         )}
         <EventsList events={this.props.events} />
+        {this.state.page > 1 && (
+          <button
+            onClick={() => {
+              this.setState(
+                state => ({ page: state.page - 1 }),
+                () => this.props.loadEvents(this.state.page)
+              );
+            }}
+          >
+            Previous
+          </button>
+        )}
+        {
+          <button
+            onClick={() => {
+              this.setState(
+                state => ({ page: state.page + 1 }),
+                () => this.props.loadEvents(this.state.page)
+              );
+            }}
+          >
+            Next
+          </button>
+        }
       </div>
     );
   }

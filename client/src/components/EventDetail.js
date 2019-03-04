@@ -18,6 +18,7 @@ class EventsDetailTicketList extends React.Component {
           <img
             src={ticket.picture}
             class="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"
+            alt=""
           />
         </div>
         <div class="dtc v-mid pl3">
@@ -39,7 +40,6 @@ class EventsDetailTicketList extends React.Component {
     const Tickets = this.props.tickets;
 
     return (
-      // event information to be added! move info from list to here and display
       <div class="mw6 center">
         {!Event && "Loading..."}
         {Event && <h1>{Event.name}</h1>}

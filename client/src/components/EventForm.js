@@ -41,7 +41,7 @@ export default function EventForm(props) {
             />
           </div>
           <div class="mt3">
-            <label class="db fw4 lh-copy f6">Start date:</label>
+            <label class="db fw4 lh-copy f6">Start date(YYYY-DD-MM):</label>
             <input
               class="pa2 input-reset ba bg-transparent w-100 measure"
               type="text"
@@ -51,7 +51,7 @@ export default function EventForm(props) {
             />
           </div>
           <div class="mt3">
-            <label class="db fw4 lh-copy f6">End date:</label>
+            <label class="db fw4 lh-copy f6">End date(YYYY-DD-MM):</label>
             <input
               class="pa2 input-reset ba bg-transparent w-100 measure"
               type="text"

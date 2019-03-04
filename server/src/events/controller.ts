@@ -8,6 +8,7 @@ import {
   Authorized
 } from "routing-controllers";
 import Event from "./entity";
+import { getRepository } from "typeorm";
 
 @JsonController()
 export default class EventsController {
@@ -16,9 +17,15 @@ export default class EventsController {
     return Event.findOne(id);
   }
 
-  @Get("/events")
-  async allEvents() {
-    const events = await Event.find();
+  @Get("/events/page/:n/")
+  async allEvents(@Param("n") n: number) {
+    const events = await getRepository(Event)
+      .createQueryBuilder("event")
+      .where("event.end_date > :todayDate", { todayDate: new Date() })
+      .skip((n - 1) * 9)
+      .take(9)
+      .getMany();
+
     return { events };
   }
 

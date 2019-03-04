@@ -30,16 +30,24 @@ class CreateEventFormContainer extends React.PureComponent {
       return <Redirect to="/events" />;
     }
     return (
-      <EventForm
-        onSubmit={this.onSubmit}
-        onChange={this.onChange}
-        values={this.state}
-      />
+      <div>
+        {this.props.currentUser && (
+          <EventForm
+            onSubmit={this.onSubmit}
+            onChange={this.onChange}
+            values={this.state}
+          />
+        )}
+      </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  currentUser: state.currentUser
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { createEvent }
 )(CreateEventFormContainer);
