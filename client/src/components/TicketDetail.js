@@ -37,20 +37,19 @@ class TicketDetail extends React.Component {
   PriceRisk() {
     const Tickets = this.props.tickets.tickets;
     const Ticket = this.props.ticket;
-    if (Tickets !== undefined) {
-      const eventId = Ticket.event.id;
-      const TicketPrice = this.props.ticket.price;
-      const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
-      const averagePrice =
-        ticketsPerEvent
-          .map(t => t.price)
-          .reduce((price1, price2) => price1 + price2) / ticketsPerEvent.length;
 
-      if (TicketPrice >= averagePrice) {
-        return -Math.round(((TicketPrice - averagePrice) / TicketPrice) * 100);
-      } else {
-        return +Math.round(((averagePrice - TicketPrice) / averagePrice) * 100);
-      }
+    const eventId = Ticket.event.id;
+    const TicketPrice = this.props.ticket.price;
+    const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
+    const averagePrice =
+      ticketsPerEvent
+        .map(t => t.price)
+        .reduce((price1, price2) => price1 + price2) / ticketsPerEvent.length;
+
+    if (TicketPrice >= averagePrice) {
+      return -Math.round(((TicketPrice - averagePrice) / TicketPrice) * 100);
+    } else {
+      return +Math.round(((averagePrice - TicketPrice) / averagePrice) * 100);
     }
   }
   //3- check the time: if creationdate is between 9-17 -10%, else +10%
@@ -91,6 +90,18 @@ class TicketDetail extends React.Component {
       }
     }
   }
+  //6- change color
+  Color() {
+    const risk = this.TotalRisk();
+
+    if (risk <= 33) {
+      return "green";
+    } else if (risk > 33 && risk <= 70) {
+      return "yellow";
+    } else {
+      return "red";
+    }
+  }
 
   render() {
     const Ticket = this.props.ticket;
@@ -117,7 +128,7 @@ class TicketDetail extends React.Component {
                 <dl class="mt2 f6">
                   <dd class="ml0">{Ticket.price} euro</dd>
                   <dd class="ml0">Sold by: {User.first_name}</dd>
-                  <dd class="ml0"> {this.TotalRisk()}%</dd>
+                  <dd class={`ml10 ${this.Color()}`}> {this.TotalRisk()}%</dd>
                 </dl>
               </div>
             </article>
