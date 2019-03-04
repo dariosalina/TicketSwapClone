@@ -27,10 +27,10 @@ export default class EventsList extends React.Component {
   }
 
   render() {
-    const Events =
-      this.props.events.length === 0
-        ? this.props.events
-        : this.props.events.filter(x => new Date(x.end_date) > new Date());
+    const Events = this.props.events;
+    // .length === 0
+    //     ? this.props.events
+    //     : this.props.events.filter(x => new Date(x.end_date) > new Date());
     const pageCount = 9 * (this.state.page + 1);
     return (
       <div class="mw6 center">

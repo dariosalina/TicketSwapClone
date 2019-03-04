@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 class EventsListContainer extends React.Component {
   componentDidMount() {
-    this.props.loadEvents();
+    const skip = 1;
+    this.props.loadEvents(skip);
   }
 
   render() {

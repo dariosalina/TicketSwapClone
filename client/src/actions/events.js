@@ -21,9 +21,9 @@ const addEvent = event => ({
   event
 });
 
-export const loadEvents = () => dispatch => {
+export const loadEvents = skip => dispatch => {
   request
-    .get(`http://localhost:4000/events`)
+    .get(`http://localhost:4000/events/page/${skip}`)
     .then(response => {
       dispatch(eventsFetched(response.body.events));
     })
