@@ -19,7 +19,6 @@ export default class EventsController {
 
   @Get("/events/page/:n/")
   async allEvents(@Param("n") n: number) {
-    console.log("skip", n);
     // const todayDate = new Date();
     const events = await getRepository(Event)
       .createQueryBuilder("event")
