@@ -19,12 +19,12 @@ class TicketDetail extends React.Component {
   // FRAUD LOGIC
   // 1-check how many tickets the author is selling, if only one ticket +10%, i couldnt use circular relations so i have to fetch all tickets and count how many tickets is selling the author of this one
 
-  UserRisk() {
-    const Tickets = this.props.tickets.tickets;
+  userRisk() {
+    const tickets = this.props.tickets.tickets;
 
-    if (Tickets !== undefined) {
+    if (tickets !== undefined) {
       const userId = this.props.ticket.user.id;
-      const usersIdArray = Tickets.map(ticket => ticket.user.id);
+      const usersIdArray = tickets.map(ticket => ticket.user.id);
       const ticketsPerAuth = usersIdArray.filter(x => x === userId);
 
       if (ticketsPerAuth.length === 1) {
@@ -34,27 +34,29 @@ class TicketDetail extends React.Component {
     }
   }
   // 2- check the average price for the tickets +-X is the percentage higher od lower than the avg, add X% to the risk
-  PriceRisk() {
-    const Tickets = this.props.tickets.tickets;
-    const eventId = this.props.ticket.event.id;
-    const TicketPrice = this.props.ticket.price;
-    const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
-    const averagePrice =
-      ticketsPerEvent
-        .map(t => t.price)
-        .reduce((price1, price2) => price1 + price2) / ticketsPerEvent.length;
+  priceRisk() {
+    const tickets = this.props.tickets.tickets;
+    if (tickets) {
+      const eventId = this.props.ticket.event.id;
+      const ticketPrice = this.props.ticket.price;
+      const ticketsPerEvent = tickets.filter(x => x.event.id === eventId);
+      const averagePrice =
+        ticketsPerEvent
+          .map(t => t.price)
+          .reduce((price1, price2) => price1 + price2) / ticketsPerEvent.length;
 
-    if (TicketPrice >= averagePrice) {
-      return -Math.round(((TicketPrice - averagePrice) / TicketPrice) * 100);
-    } else {
-      return +Math.round(((averagePrice - TicketPrice) / averagePrice) * 100);
+      if (ticketPrice >= averagePrice) {
+        return -Math.round(((ticketPrice - averagePrice) / ticketPrice) * 100);
+      } else {
+        return +Math.round(((averagePrice - ticketPrice) / averagePrice) * 100);
+      }
     }
   }
   //3- check the time: if creationdate is between 9-17 -10%, else +10%
-  CreationTimeRisk() {
-    const Ticket = this.props.ticket;
-    if (Ticket) {
-      const creationHour = Ticket.creation_hour.slice(11, 13);
+  creationTimeRisk() {
+    const ticket = this.props.ticket;
+    if (ticket) {
+      const creationHour = ticket.creation_hour.slice(11, 13);
       if (creationHour > 9 && creationHour < 17) {
         return -10;
       } else {
@@ -63,7 +65,7 @@ class TicketDetail extends React.Component {
     }
   }
   //4-check how many comments, more than 3 add 5%
-  NumberCommentsRisk() {
+  numberCommentsRisk() {
     const commentsNum = this.props.ticket.comments;
 
     if (commentsNum.length >= 3) {
@@ -72,13 +74,13 @@ class TicketDetail extends React.Component {
     return 0;
   }
   //5 - calculate final risk
-  TotalRisk() {
+  totalRisk() {
     if (this.props.ticket !== undefined) {
       const totalRisk =
-        this.PriceRisk() +
-        this.UserRisk() +
-        this.CreationTimeRisk() +
-        this.NumberCommentsRisk();
+        this.priceRisk() +
+        this.userRisk() +
+        this.creationTimeRisk() +
+        this.numberCommentsRisk();
 
       if (totalRisk < 5) {
         return 5;
@@ -90,8 +92,8 @@ class TicketDetail extends React.Component {
     }
   }
   //6- change color
-  Color() {
-    const risk = this.TotalRisk();
+  color() {
+    const risk = this.totalRisk();
 
     if (risk <= 33) {
       return "green";
@@ -103,37 +105,37 @@ class TicketDetail extends React.Component {
   }
 
   render() {
-    const Ticket = this.props.ticket;
-    const User = this.props.user;
-    const Event = this.props.event;
+    const ticket = this.props.ticket;
+    const user = this.props.user;
+    const event = this.props.event;
 
     return (
       <div class="mw6 center">
         <h1>Details:</h1>
-        {!Ticket && !User && !Event && "Loading"}
+        {!ticket && !user && !event && "Loading"}
 
-        {Ticket && User && Event && (
+        {ticket && user && event && (
           <span>
             <article>
               <div class="dtc w3">
-                <img alt={"ticket"} src={Ticket.picture} class="db w-200" />
+                <img alt={"ticket"} src={ticket.picture} class="db w-200" />
               </div>
               <div class="dtc v-top pl2">
                 <h1 class="f6 f5-ns fw6 lh-title black mv0">
-                  Event: {Event.name}{" "}
+                  Event: {event.name}{" "}
                 </h1>
-                <h2 class="f6 fw4 mt2 mb0 black-60">{Ticket.description}</h2>
+                <h2 class="f6 fw4 mt2 mb0 black-60">{ticket.description}</h2>
                 <dl class="mt2 f6">
-                  <dd class="ml0">{Ticket.price} euro</dd>
-                  <dd class="ml0">Sold by: {User.first_name}</dd>
-                  <dd class={`ml10 ${this.Color()}`}> {this.TotalRisk()}%</dd>
+                  <dd class="ml0">{ticket.price} euro</dd>
+                  <dd class="ml0">Sold by: {user.first_name}</dd>
+                  <dd class={`ml10 ${this.color()}`}> {this.totalRisk()}%</dd>
                 </dl>
               </div>
             </article>
 
             <span class="mw6 center">
               Comments:
-              {Ticket.comments.map(comment => (
+              {ticket.comments.map(comment => (
                 <div class="dtc v-mid pl3" key={comment.id}>
                   <h1 class="f6 f5-ns fw6 lh-title black mv0">
                     {comment.comment}
