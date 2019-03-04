@@ -34,7 +34,6 @@ export const loadEvent = id => dispatch => {
   request
     .get(`http://localhost:4000/events/${id}`)
     .then(response => {
-      console.log(response.body);
       dispatch(eventFetched(response.body));
     })
     .catch(console.error);
