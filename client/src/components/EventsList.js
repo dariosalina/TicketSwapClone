@@ -19,7 +19,7 @@ export default class EventsList extends React.Component {
           <dl class="mt2 f6">
             <dd class="ml0">From: {event.start_date}</dd>
 
-            <dd class="ml0"> to:{event.end_date}</dd>
+            <dd class="ml0"> to: {event.end_date}</dd>
           </dl>
         </div>
       </article>
