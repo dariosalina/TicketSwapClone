@@ -19,21 +19,14 @@ export default class EventsController {
 
   @Get("/events/page/:n/")
   async allEvents(@Param("n") n: number) {
-    // const todayDate = new Date();
     const events = await getRepository(Event)
       .createQueryBuilder("event")
-      // .where("event.end_date > :end_date", { end_date: MoreThan(todayDate) })
+      .where("event.end_date > :todayDate", { todayDate: new Date() })
       .skip((n - 1) * 9)
       .take(9)
       .getMany();
 
     return { events };
-
-    // const todayDate = new Date();
-    // console.log(todayDate);
-    // const events = await Event.find({
-    //   where: { end_date: MoreThan(todayDate) }
-    // });
   }
 
   @Authorized()

@@ -26,8 +26,6 @@ class EventsListContainer extends React.Component {
                 state => ({ page: state.page - 1 }),
                 () => this.props.loadEvents(this.state.page)
               );
-              // console.log(this.state.page);
-              // this.props.loadEvents(this.state.page);
             }}
           >
             Previous
@@ -40,8 +38,6 @@ class EventsListContainer extends React.Component {
                 state => ({ page: state.page + 1 }),
                 () => this.props.loadEvents(this.state.page)
               );
-              // console.log(this.state.page);
-              // this.props.loadEvents(this.state.page);
             }}
           >
             Next
