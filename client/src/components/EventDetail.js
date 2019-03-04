@@ -49,6 +49,7 @@ class EventsDetailTicketList extends React.Component {
 
         {!Tickets && "Loading..."}
 
+        {/* this conditional rendering doesn't work properly */}
         {Tickets && (
           <main class="mw6 center">{Tickets.map(this.renderTicketList)}</main>
         )}

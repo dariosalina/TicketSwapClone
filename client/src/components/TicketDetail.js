@@ -67,7 +67,7 @@ class TicketDetail extends React.Component {
   //4-che how many comments, more than 3 add 5%
   NumberCommentsRisk() {
     const commentsNum = this.props.ticket.comments;
-    console.log(commentsNum);
+
     if (commentsNum.length >= 3) {
       return 5;
     }
