@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import CommentFormContainer from "./CommentFormContainer";
 
 class TicketDetail extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const id = this.props.match.params.id;
     this.props.loadTicket(id);
 

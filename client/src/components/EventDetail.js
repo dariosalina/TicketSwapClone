@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class EventsDetailTicketList extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     const id = this.props.match.params.id;
     this.props.loadEvent(id);
     this.props.loadAllTicketsForEvent(id);
@@ -36,22 +36,22 @@ class EventsDetailTicketList extends React.Component {
   }
 
   render() {
-    const Event = this.props.event;
-    const Tickets = this.props.tickets;
+    const event = this.props.event;
+    const tickets = this.props.tickets;
 
     return (
       <div class="mw6 center">
-        {!Event && "Loading..."}
-        {Event && <h1>{Event.name}</h1>}
+        {!event && "Loading..."}
+        {event && <h1>{event.name}</h1>}
         {this.props.currentUser && (
           <Link to={`/createtickets`}>Create New Ticket</Link>
         )}
 
-        {!Tickets && "Loading..."}
+        {!tickets && "Loading..."}
 
         {/* this conditional rendering doesn't work properly */}
-        {Tickets && (
-          <main class="mw6 center">{Tickets.map(this.renderTicketList)}</main>
+        {tickets && (
+          <main class="mw6 center">{tickets.map(this.renderTicketList)}</main>
         )}
       </div>
     );
