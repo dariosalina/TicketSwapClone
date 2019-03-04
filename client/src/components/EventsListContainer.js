@@ -9,12 +9,7 @@ class EventsListContainer extends React.Component {
     page: 1
   };
   componentDidMount() {
-    // const page = 1;
     console.log(this.state.page);
-    this.props.loadEvents(this.state.page);
-  }
-
-  componentDidUpdate() {
     this.props.loadEvents(this.state.page);
   }
 
@@ -25,19 +20,6 @@ class EventsListContainer extends React.Component {
           <Link to={`/createevents`}>Create New Event</Link>
         )}
         <EventsList events={this.props.events} />
-
-        {
-          // events.length > pageCount &&
-          <button
-            onClick={() => {
-              this.setState(state => ({ page: state.page + 1 }));
-              // console.log(this.state.page);
-              // this.props.loadEvents(this.state.page);
-            }}
-          >
-            Next
-          </button>
-        }
         {
           // !!this.state.page &&
           <button
@@ -48,6 +30,18 @@ class EventsListContainer extends React.Component {
             }}
           >
             Previous
+          </button>
+        }
+        {
+          // events.length > pageCount &&
+          <button
+            onClick={() => {
+              this.setState(state => ({ page: state.page + 1 }));
+              // console.log(this.state.page);
+              // this.props.loadEvents(this.state.page);
+            }}
+          >
+            Next
           </button>
         }
       </div>
