@@ -62,7 +62,7 @@ class TicketDetail extends React.Component {
       }
     }
   }
-  //4-che how many comments, more than 3 add 5%
+  //4-check how many comments, more than 3 add 5%
   NumberCommentsRisk() {
     const commentsNum = this.props.ticket.comments;
 
@@ -108,7 +108,6 @@ class TicketDetail extends React.Component {
     const Event = this.props.event;
 
     return (
-      // event information to be added! move info from list to here and display
       <div class="mw6 center">
         <h1>Details:</h1>
         {!Ticket && !User && !Event && "Loading"}
