@@ -14,6 +14,10 @@ class EventsListContainer extends React.Component {
     this.props.loadEvents(this.state.page);
   }
 
+  componentDidUpdate() {
+    this.props.loadEvents(this.state.page);
+  }
+
   render() {
     return (
       <div class="mw6 center">
@@ -27,8 +31,8 @@ class EventsListContainer extends React.Component {
           <button
             onClick={() => {
               this.setState(state => ({ page: state.page + 1 }));
-              console.log(this.state.page);
-              this.props.loadEvents(this.state.page);
+              // console.log(this.state.page);
+              // this.props.loadEvents(this.state.page);
             }}
           >
             Next
@@ -39,8 +43,8 @@ class EventsListContainer extends React.Component {
           <button
             onClick={() => {
               this.setState(state => ({ page: state.page - 1 }));
-              console.log(this.state.page);
-              this.props.loadEvents(this.state.page);
+              // console.log(this.state.page);
+              // this.props.loadEvents(this.state.page);
             }}
           >
             Previous
