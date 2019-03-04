@@ -9,7 +9,7 @@ export default class EventsList extends React.Component {
     return (
       <article>
         <div class="dtc w3">
-          <img src={event.picture} class="db w-100" />
+          <img alt="" src={event.picture} class="db w-100" />
         </div>
         <div class="dtc v-top pl2">
           <h1 class="f6 f5-ns fw6 lh-title black mv0">
