@@ -18,6 +18,7 @@ class EventsDetailTicketList extends React.Component {
           <img
             src={ticket.picture}
             class="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"
+            alt=""
           />
         </div>
         <div class="dtc v-mid pl3">

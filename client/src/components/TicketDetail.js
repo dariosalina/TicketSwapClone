@@ -36,9 +36,7 @@ class TicketDetail extends React.Component {
   // 2- check the average price for the tickets +-X is the percentage higher od lower than the avg, add X% to the risk
   PriceRisk() {
     const Tickets = this.props.tickets.tickets;
-    const Ticket = this.props.ticket;
-
-    const eventId = Ticket.event.id;
+    const eventId = this.props.ticket.event.id;
     const TicketPrice = this.props.ticket.price;
     const ticketsPerEvent = Tickets.filter(x => x.event.id === eventId);
     const averagePrice =
