@@ -23,7 +23,7 @@ export default class EventsController {
     const events = await getRepository(Event)
       .createQueryBuilder("event")
       // .where("event.end_date > :end_date", { end_date: MoreThan(todayDate) })
-      .skip(n - 1)
+      .skip((n - 1) * 9)
       .take(9)
       .getMany();
 
