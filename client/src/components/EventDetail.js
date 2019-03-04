@@ -40,7 +40,6 @@ class EventsDetailTicketList extends React.Component {
     const Tickets = this.props.tickets;
 
     return (
-      // event information to be added! move info from list to here and display
       <div class="mw6 center">
         {!Event && "Loading..."}
         {Event && <h1>{Event.name}</h1>}
