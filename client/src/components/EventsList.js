@@ -17,7 +17,7 @@ export default class EventsList extends React.Component {
           </h1>
           <h2 class="f6 fw4 mt2 mb0 black-60">{event.description}</h2>
           <dl class="mt2 f6">
-            <dd class="ml0">From: {event.start_date}</dd>
+            <dd class="ml0">From: (YYYY-MM-DD) {event.start_date}</dd>
 
             <dd class="ml0"> to: {event.end_date}</dd>
           </dl>
@@ -29,19 +29,12 @@ export default class EventsList extends React.Component {
   render() {
     const events = this.props.events;
 
-    // const pageCount = 9 * (this.state.page + 1);
     return (
       <div class="mw6 center">
         <h1>Here you can find a list of events:</h1>
         <h3> Click on the title to see the details</h3>
         {!events && "Loading"}
-        {events && (
-          <div>
-            {events
-              // .slice(9 * this.state.page, pageCount)
-              .map(this.renderEventList)}
-          </div>
-        )}
+        {events && <div>{events.map(this.renderEventList)}</div>}
       </div>
     );
   }

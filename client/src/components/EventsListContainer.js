@@ -19,6 +19,8 @@ class EventsListContainer extends React.Component {
           <Link to={`/createevents`}>Create New Event</Link>
         )}
         <EventsList events={this.props.events} />
+
+        {/* Previous button logic */}
         {this.state.page > 1 && (
           <button
             onClick={() => {
@@ -31,6 +33,8 @@ class EventsListContainer extends React.Component {
             Previous
           </button>
         )}
+
+        {/* Next button logic */}
         {
           <button
             onClick={() => {
